@@ -1,3 +1,3 @@
-const container = require('./container');
+const container = require('./src/container');
 
 module.exports = container;
