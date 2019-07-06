@@ -37,7 +37,7 @@ const configuration = {
     port: 8080,
     // Injectable module
     app: {
-        // The constructor
+        // The constructor function of the module
         module: function App (host, port) {
             this.host = host;
             this.port = port;
@@ -45,8 +45,8 @@ const configuration = {
                 // some more logic...
             }
         },
-        // Keys of the parameters or modules that
-        // should be injected as parameters to the function
+        // Names of the parameters or modules that should be injected
+        // as parameters to the module's constructor function
         args: ['host', 'port'],
         // Strategy to use when creating "app"
         strategy: STRATEGY.NEW
