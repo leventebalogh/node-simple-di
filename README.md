@@ -20,21 +20,24 @@ A simple Dependency Injection container built for Node.js where **the configurat
 
 ```bash
 # Using NPM
-$ npm install di-container
+$ npm install node-simple-di
 
 # Using Yarn
-$ yarn add di-container
+$ yarn add node-simple-di
 ```
 
 ## Basic usage
 ```javascript
-const { getContainer, STRATEGY } = require('di-container');
+const { getContainer, STRATEGY } = require('node-simple-di');
 
-const container = getContainer({
+// The configuration for the DI container
+const configuration = {
+    // Injectable parameters
     host: 'localhost',
     port: 8080,
-    // ... all the other services
+    // Injectable module
     app: {
+        // The constructor
         module: function App (host, port) {
             this.host = host;
             this.port = port;
@@ -42,10 +45,15 @@ const container = getContainer({
                 // some more logic...
             }
         },
+        // Keys of the parameters or modules that
+        // should be injected as parameters to the function
         args: ['host', 'port'],
+        // Strategy to use when creating "app"
         strategy: STRATEGY.NEW
     }
-});
+}
+
+const container = getContainer(configuration);
 
 container.get('app').start();
 ```
@@ -78,7 +86,7 @@ The API is really simple, there are only two functions that you can use.
 Most of the API comes by interacting with the config itself.
 
 ```javascript
-const { getContainer, STRATEGY } = require('di-container');
+const { getContainer, STRATEGY } = require('node-simple-di');
 const container = getContainer({ /* ... */ });
 
 // Returns a service with all the dependencies resolved.
@@ -102,7 +110,7 @@ an instance returns a singleton.
 
 ```javascript
 // config.js
-const { getContainer, STRATEGY } = require('di-container');
+const { getContainer, STRATEGY } = require('node-simple-di');
 
 const container = getContainer({
     m: 10,
@@ -156,7 +164,7 @@ Use the `strategy: STRATEGY.NEW` setting for it.<br>
 Heads up! This will give back a Singleton.
 
 ```javascript
-const { STRATEGY } = require('di-container');
+const { STRATEGY } = require('node-simple-di');
 
 const config = {
     foo: {
@@ -239,7 +247,7 @@ const config = {
 You can dynamically overwrite a service or add a new one easily.
 
 ```javascript
-import { getContainer } from 'di-container';
+import { getContainer } from 'node-simple-di';
 
 const container = getContainer({
     host: 'localhost',
