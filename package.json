@@ -6,7 +6,7 @@
   "author": "Levente Balogh <balogh.levente.hu@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^24.8.0"
+    "jest": "^25.3.0"
   },
   "scripts": {
     "test": "jest ./src"
